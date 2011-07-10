@@ -30,7 +30,7 @@
   </scm>
 
   <properties>
-    <lucene.version>3.0.2</lucene.version>
+    <lucene.version>3.0.3</lucene.version>
     <arq.version>2.8.5</arq.version>
     <tdb.version>0.8.7</tdb.version>
     <jdk.version>1.6</jdk.version>
