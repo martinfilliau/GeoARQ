@@ -79,7 +79,7 @@ public class LuceneIndexSearcher extends IndexSearcherBase implements IndexSearc
 		Query luceneQuery = new MatchAllDocsQuery();
 		ArrayList<Document> hits = new ArrayList<Document>();
 		try {
-			TopDocs docs = indexSearcher.search(luceneQuery, distanceQueryBuilder.getFilter(), 10, sort);
+			TopDocs docs = indexSearcher.search(luceneQuery, distanceQueryBuilder.getFilter(), NUM_RESULTS, sort);
 			Map<Integer,Double> distances = distanceQueryBuilder.getDistanceFilter().getDistances();
 			for (ScoreDoc sd : docs.scoreDocs) {
 				org.apache.lucene.document.Document luceneDocument = indexSearcher.doc(sd.doc);
