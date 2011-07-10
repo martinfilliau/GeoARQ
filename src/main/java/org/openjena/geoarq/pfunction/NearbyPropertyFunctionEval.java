@@ -48,6 +48,11 @@ import com.hp.hpl.jena.util.iterator.Map1Iterator;
 
 public abstract class NearbyPropertyFunctionEval extends PropertyFunctionEval {
 
+    /**
+     * Default radius (in miles) if not specified
+     */
+    private static final double DEFAULT_RADIUS = 100.0;
+    
 	private static final Logger LOG = LoggerFactory.getLogger(NearbyPropertyFunctionEval.class);
 	
 	protected NearbyPropertyFunctionEval() {
@@ -88,6 +93,7 @@ public abstract class NearbyPropertyFunctionEval extends PropertyFunctionEval {
         
         Node latitude = null ;
         Node longitude = null ;
+        Node radius = null;
         
         long limit = Query.NOLIMIT ;
         float scoreLimit = -1.0f ;
@@ -109,6 +115,9 @@ public abstract class NearbyPropertyFunctionEval extends PropertyFunctionEval {
             // Length checked in build
             latitude = argObject.getArg(0) ;
             longitude = argObject.getArg(1) ;
+            if(argObject.getArgListSize() == 3) {
+                radius = argObject.getArg(2);
+            }
             
 //            for ( int i = 2 ; i < argObject.getArgListSize() ; i++ ) {
 //                Node n = argObject.getArg(i) ;
@@ -158,6 +167,14 @@ public abstract class NearbyPropertyFunctionEval extends PropertyFunctionEval {
         Double lat = asDouble(latitude) ;
         Double lgt = asDouble(longitude) ;
         
+        Double rdius;
+        
+        if(radius == null) {
+            rdius = DEFAULT_RADIUS;
+        } else {
+            rdius = asDouble(radius);
+        }
+        
         if ( lat == null ) {
             LOG.warn("Not a double (it was a moment ago!): " + latitude) ;
             return new QueryIterNullIterator(execCxt) ;
@@ -172,9 +189,9 @@ public abstract class NearbyPropertyFunctionEval extends PropertyFunctionEval {
         
         if ( match.isVariable() ) {
         	// Miles should be read from use input!
-            return varSubject(binding, Var.alloc(match), scoreVar, lat, lgt, 100.0, limit, scoreLimit, execCxt) ;
+            return varSubject(binding, Var.alloc(match), scoreVar, lat, lgt, rdius, limit, scoreLimit, execCxt) ;
         } else {
-            return boundSubject(binding, match, scoreVar, lat, lgt, 100.0, limit, scoreLimit, execCxt) ;
+            return boundSubject(binding, match, scoreVar, lat, lgt, rdius, limit, scoreLimit, execCxt) ;
         }
     }
     
