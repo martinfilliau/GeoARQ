@@ -40,6 +40,10 @@ public class ModelIndexerSubject extends ModelIndexerBase {
 	private Map<String, Double> latitudes = new HashMap<String, Double>();
 	private Map<String, Double> longitudes = new HashMap<String, Double>();
 
+        public ModelIndexerSubject() {
+            super();
+        }
+        
 	public ModelIndexerSubject(String url) {
 		super(url);
 	}

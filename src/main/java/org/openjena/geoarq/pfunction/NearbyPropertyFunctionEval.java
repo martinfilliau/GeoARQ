@@ -188,7 +188,6 @@ public abstract class NearbyPropertyFunctionEval extends PropertyFunctionEval {
         Var scoreVar = (score==null)?null:Var.alloc(score) ;
         
         if ( match.isVariable() ) {
-        	// Miles should be read from use input!
             return varSubject(binding, Var.alloc(match), scoreVar, lat, lgt, rdius, limit, scoreLimit, execCxt) ;
         } else {
             return boundSubject(binding, match, scoreVar, lat, lgt, rdius, limit, scoreLimit, execCxt) ;

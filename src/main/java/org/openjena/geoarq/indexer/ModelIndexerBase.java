@@ -24,10 +24,15 @@ import org.openjena.geoarq.searcher.IndexSearcherFactory;
 import com.hp.hpl.jena.rdf.listeners.StatementListener;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import org.apache.lucene.store.RAMDirectory;
 
 public abstract class ModelIndexerBase extends StatementListener implements ModelIndexer {
 
     protected IndexBuilder builder ;
+    
+    public ModelIndexerBase() {
+        builder = IndexBuilderFactory.create();
+    }
     
     public ModelIndexerBase(String location) { 
     	builder = IndexBuilderFactory.create(location);

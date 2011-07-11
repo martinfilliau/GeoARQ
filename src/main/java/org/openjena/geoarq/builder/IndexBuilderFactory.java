@@ -24,4 +24,7 @@ public class IndexBuilderFactory {
 		return new LuceneIndexBuilder(location);
 	}
 	
+        public static IndexBuilder create() {
+            return new LuceneIndexBuilder();
+        }
 }
