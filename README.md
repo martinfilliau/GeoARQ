@@ -55,7 +55,6 @@ Todo
  * Add more tests
  * Clean-up the code
  * Add support for http://www.w3.org/2003/01/geo/wgs84_pos#lat_long
- * Add ability to specify radius (i.e. geoarq:nearby (51.3000 -2.71000 20))
  * Add ability to specify number of results within a radius
    (i.e. geoarq:nearby (51.3000 -2.71000 20 10))
  * Investigate Geohash [2]
